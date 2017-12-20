@@ -51,6 +51,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\Implementation\DoctorRepository.cs" />
+    <Compile Include="DataAccess\Implementation\MedicineRepository.cs" />
+    <Compile Include="DataAccess\Implementation\OperationRepository.cs" />
+    <Compile Include="DataAccess\Implementation\PatientRepository.cs" />
+    <Compile Include="DataAccess\Implementation\RoomRepository.cs" />
+    <Compile Include="DataAccess\Implementation\TreatmentReportRepository.cs" />
+    <Compile Include="DataAccess\Implementation\TreatmentRepository.cs" />
+    <Compile Include="DataAccess\Implementation\TypeMedicineRepository.cs" />
+    <Compile Include="DataAccess\Implementation\TypeOperationRepository.cs" />
+    <Compile Include="DataAccess\IRepository.cs" />
     <Compile Include="DoctorEntity.cs">
       <DependentUpon>MedicalModel.tt</DependentUpon>
     </Compile>

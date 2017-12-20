@@ -15,11 +15,30 @@ namespace GoodMedicalApp.DataAccess
     
     public partial class MedicalEntities : DbContext
     {
-        public MedicalEntities()
+        private MedicalEntities()
             : base("name=MedicalEntities")
         {
         }
-    
+
+        private static object rootSync = new object();
+        private static MedicalEntities instance;
+
+        public static MedicalEntities GetInstance()
+        {
+            if (instance == null)
+            {
+                lock (rootSync)
+                {
+                    if (instance == null)
+                    {
+                        instance = new MedicalEntities();
+                    }
+                }
+            }
+
+            return instance;
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
