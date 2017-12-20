@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MedicalApp.DataAccess.DataAccess.Implementation
+namespace GoodMedicalApp.DataAccess.DataAccess.Implementation
 {
     public class TreatmentRepository:IRepository<TreatmentEntity>
     {

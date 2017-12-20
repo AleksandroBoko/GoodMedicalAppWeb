@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MedicalApp.DataAccess.DataAccess
+namespace GoodMedicalApp.DataAccess.DataAccess
 {
     public interface IRepository<T>
     {
