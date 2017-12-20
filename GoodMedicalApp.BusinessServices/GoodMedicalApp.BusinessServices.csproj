@@ -40,7 +40,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mappers\IMapper.cs" />
+    <Compile Include="Mappers\Implementation\DoctorMapper.cs" />
+    <Compile Include="Mappers\Implementation\MedicineMapper.cs" />
+    <Compile Include="Mappers\Implementation\OperationMapper.cs" />
+    <Compile Include="Mappers\Implementation\PatientMapper.cs" />
+    <Compile Include="Mappers\Implementation\RoomMapper.cs" />
+    <Compile Include="Mappers\Implementation\TreatmentMapper.cs" />
+    <Compile Include="Mappers\Implementation\TreatmentReportMapper.cs" />
+    <Compile Include="Mappers\Implementation\TypeMedicineMapper.cs" />
+    <Compile Include="Mappers\Implementation\TypeOperationMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GoodMedicalApp.DataAccess\GoodMedicalApp.DataAccess.csproj">
+      <Project>{48bb02c8-119f-4e37-ba86-d6c2b8cea3b6}</Project>
+      <Name>GoodMedicalApp.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GoodMedicalApp.Domain\GoodMedicalApp.Domain.csproj">
+      <Project>{9549b74c-bdf5-4563-8523-706c75be20a8}</Project>
+      <Name>GoodMedicalApp.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

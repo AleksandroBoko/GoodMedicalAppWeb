@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GoodMedicalApp.Domain.Models
 {
-    class TreatmentReport
+    public class TreatmentReport
     {
         public int Id { get; set; }
         public Treatment CurrentTreatment { get; set; }
