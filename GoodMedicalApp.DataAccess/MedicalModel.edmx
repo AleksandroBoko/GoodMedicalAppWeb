@@ -1,0 +1,671 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MedicalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Qualification" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Medicine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Cost" Type="float" Nullable="false" />
+          <Property Name="MethodUsing" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="TypeMedicineId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Operation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeOperationId" Type="int" Nullable="false" />
+          <Property Name="TreatmentId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'medical.dbo.OperationMedicine' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OperationMedicine">
+          <Key>
+            <PropertyRef Name="OperationId" />
+            <PropertyRef Name="MedicineId" />
+          </Key>
+          <Property Name="OperationId" Type="int" Nullable="false" />
+          <Property Name="MedicineId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="RoomId" Type="int" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Treatment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+          <Property Name="PatientId" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TreatmentReport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TreatmentId" Type="int" Nullable="false" />
+          <Property Name="Conclusion" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="2000" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'medical.dbo.TreatmentReportDetail' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TreatmentReportDetail">
+          <Key>
+            <PropertyRef Name="TreatmentReportId" />
+            <PropertyRef Name="MedicineId" />
+          </Key>
+          <Property Name="TreatmentReportId" Type="int" Nullable="false" />
+          <Property Name="MedicineId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeMedicine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeOperation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Medicine_TypeMedicine">
+          <End Role="TypeMedicine" Type="Self.TypeMedicine" Multiplicity="1" />
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeMedicine">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Medicine">
+              <PropertyRef Name="TypeMedicineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Operation_TypeOperation">
+          <End Role="TypeOperation" Type="Self.TypeOperation" Multiplicity="1" />
+          <End Role="Operation" Type="Self.Operation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOperation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Operation">
+              <PropertyRef Name="TypeOperationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OperationMedicine_Medicine">
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="1" />
+          <End Role="OperationMedicine" Type="Self.OperationMedicine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicine">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OperationMedicine">
+              <PropertyRef Name="MedicineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OperationMedicine_Operation">
+          <End Role="Operation" Type="Self.Operation" Multiplicity="1" />
+          <End Role="OperationMedicine" Type="Self.OperationMedicine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OperationMedicine">
+              <PropertyRef Name="OperationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_Room">
+          <End Role="Room" Type="Self.Room" Multiplicity="0..1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="RoomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Treatment_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Treatment" Type="Self.Treatment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Treatment">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Treatment_Patient">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Treatment" Type="Self.Treatment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Treatment">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Treatment_Treatment">
+          <End Role="Treatment" Type="Self.Treatment" Multiplicity="1" />
+          <End Role="Operation" Type="Self.Operation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Treatment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Operation">
+              <PropertyRef Name="TreatmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TreatmentReport_Treatment">
+          <End Role="Treatment" Type="Self.Treatment" Multiplicity="1" />
+          <End Role="TreatmentReport" Type="Self.TreatmentReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Treatment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TreatmentReport">
+              <PropertyRef Name="TreatmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_TreatmentReportDetail_Medicine">
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="1" />
+          <End Role="TreatmentReportDetail" Type="Self.TreatmentReportDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicine">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TreatmentReportDetail">
+              <PropertyRef Name="MedicineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TreatmentReportDetail_TreatmentReport">
+          <End Role="TreatmentReport" Type="Self.TreatmentReport" Multiplicity="1" />
+          <End Role="TreatmentReportDetail" Type="Self.TreatmentReportDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TreatmentReport">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TreatmentReportDetail">
+              <PropertyRef Name="TreatmentReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MedicalModelStoreContainer">
+          <EntitySet Name="Doctor" EntityType="Self.Doctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Medicine" EntityType="Self.Medicine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Operation" EntityType="Self.Operation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Treatment" EntityType="Self.Treatment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TreatmentReport" EntityType="Self.TreatmentReport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeMedicine" EntityType="Self.TypeMedicine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeOperation" EntityType="Self.TypeOperation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OperationMedicine" EntityType="Self.OperationMedicine" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [OperationMedicine].[OperationId] AS [OperationId], 
+    [OperationMedicine].[MedicineId] AS [MedicineId]
+    FROM [dbo].[OperationMedicine] AS [OperationMedicine]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TreatmentReportDetail" EntityType="Self.TreatmentReportDetail" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TreatmentReportDetail].[TreatmentReportId] AS [TreatmentReportId], 
+    [TreatmentReportDetail].[MedicineId] AS [MedicineId]
+    FROM [dbo].[TreatmentReportDetail] AS [TreatmentReportDetail]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Medicine_TypeMedicine" Association="Self.FK_Medicine_TypeMedicine">
+            <End Role="TypeMedicine" EntitySet="TypeMedicine" />
+            <End Role="Medicine" EntitySet="Medicine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Operation_TypeOperation" Association="Self.FK_Operation_TypeOperation">
+            <End Role="TypeOperation" EntitySet="TypeOperation" />
+            <End Role="Operation" EntitySet="Operation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OperationMedicine_Medicine" Association="Self.FK_OperationMedicine_Medicine">
+            <End Role="Medicine" EntitySet="Medicine" />
+            <End Role="OperationMedicine" EntitySet="OperationMedicine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OperationMedicine_Operation" Association="Self.FK_OperationMedicine_Operation">
+            <End Role="Operation" EntitySet="Operation" />
+            <End Role="OperationMedicine" EntitySet="OperationMedicine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_Room" Association="Self.FK_Patient_Room">
+            <End Role="Room" EntitySet="Room" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Treatment_Doctor" Association="Self.FK_Treatment_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Treatment" EntitySet="Treatment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Treatment_Patient" Association="Self.FK_Treatment_Patient">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Treatment" EntitySet="Treatment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Treatment_Treatment" Association="Self.FK_Treatment_Treatment">
+            <End Role="Treatment" EntitySet="Treatment" />
+            <End Role="Operation" EntitySet="Operation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TreatmentReport_Treatment" Association="Self.FK_TreatmentReport_Treatment">
+            <End Role="Treatment" EntitySet="Treatment" />
+            <End Role="TreatmentReport" EntitySet="TreatmentReport" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_TreatmentReportDetail_Medicine" Association="Self.Fk_TreatmentReportDetail_Medicine">
+            <End Role="Medicine" EntitySet="Medicine" />
+            <End Role="TreatmentReportDetail" EntitySet="TreatmentReportDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TreatmentReportDetail_TreatmentReport" Association="Self.FK_TreatmentReportDetail_TreatmentReport">
+            <End Role="TreatmentReport" EntitySet="TreatmentReport" />
+            <End Role="TreatmentReportDetail" EntitySet="TreatmentReportDetail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MedicalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DoctorEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Qualification" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Treatments" Relationship="Self.FK_Treatment_Doctor" FromRole="Doctor" ToRole="Treatment" />
+        </EntityType>
+        <EntityType Name="MedicineEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cost" Type="Double" Nullable="false" />
+          <Property Name="MethodUsing" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TypeMedicineId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TypeMedicine" Relationship="Self.FK_Medicine_TypeMedicine" FromRole="Medicine" ToRole="TypeMedicine" />
+          <NavigationProperty Name="Operations" Relationship="Self.OperationMedicine" FromRole="Medicine" ToRole="Operation" />
+          <NavigationProperty Name="TreatmentReports" Relationship="Self.TreatmentReportDetail" FromRole="Medicine" ToRole="TreatmentReport" />
+        </EntityType>
+        <EntityType Name="OperationEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeOperationId" Type="Int32" Nullable="false" />
+          <Property Name="TreatmentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TypeOperation" Relationship="Self.FK_Operation_TypeOperation" FromRole="Operation" ToRole="TypeOperation" />
+          <NavigationProperty Name="Treatment" Relationship="Self.FK_Treatment_Treatment" FromRole="Operation" ToRole="Treatment" />
+          <NavigationProperty Name="Medicines" Relationship="Self.OperationMedicine" FromRole="Operation" ToRole="Medicine" />
+        </EntityType>
+        <EntityType Name="PatientEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="RoomId" Type="Int32" />
+          <NavigationProperty Name="Room" Relationship="Self.FK_Patient_Room" FromRole="Patient" ToRole="Room" />
+          <NavigationProperty Name="Treatments" Relationship="Self.FK_Treatment_Patient" FromRole="Patient" ToRole="Treatment" />
+        </EntityType>
+        <EntityType Name="RoomEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK_Patient_Room" FromRole="Room" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="TreatmentEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_Treatment_Doctor" FromRole="Treatment" ToRole="Doctor" />
+          <NavigationProperty Name="Operations" Relationship="Self.FK_Treatment_Treatment" FromRole="Treatment" ToRole="Operation" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_Treatment_Patient" FromRole="Treatment" ToRole="Patient" />
+          <NavigationProperty Name="TreatmentReports" Relationship="Self.FK_TreatmentReport_Treatment" FromRole="Treatment" ToRole="TreatmentReport" />
+        </EntityType>
+        <EntityType Name="TreatmentReportEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TreatmentId" Type="Int32" Nullable="false" />
+          <Property Name="Conclusion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Treatment" Relationship="Self.FK_TreatmentReport_Treatment" FromRole="TreatmentReport" ToRole="Treatment" />
+          <NavigationProperty Name="Medicines" Relationship="Self.TreatmentReportDetail" FromRole="TreatmentReport" ToRole="Medicine" />
+        </EntityType>
+        <EntityType Name="TypeMedicineEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Medicines" Relationship="Self.FK_Medicine_TypeMedicine" FromRole="TypeMedicine" ToRole="Medicine" />
+        </EntityType>
+        <EntityType Name="TypeOperationEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Operations" Relationship="Self.FK_Operation_TypeOperation" FromRole="TypeOperation" ToRole="Operation" />
+        </EntityType>
+        <Association Name="FK_Treatment_Doctor">
+          <End Role="Doctor" Type="MedicalModel.DoctorEntity" Multiplicity="1" />
+          <End Role="Treatment" Type="MedicalModel.TreatmentEntity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Treatment">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Medicine_TypeMedicine">
+          <End Role="TypeMedicine" Type="MedicalModel.TypeMedicineEntity" Multiplicity="1" />
+          <End Role="Medicine" Type="MedicalModel.MedicineEntity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeMedicine">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Medicine">
+              <PropertyRef Name="TypeMedicineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Operation_TypeOperation">
+          <End Role="TypeOperation" Type="MedicalModel.TypeOperationEntity" Multiplicity="1" />
+          <End Role="Operation" Type="MedicalModel.OperationEntity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOperation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Operation">
+              <PropertyRef Name="TypeOperationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Treatment_Treatment">
+          <End Role="Treatment" Type="MedicalModel.TreatmentEntity" Multiplicity="1" />
+          <End Role="Operation" Type="MedicalModel.OperationEntity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Treatment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Operation">
+              <PropertyRef Name="TreatmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patient_Room">
+          <End Role="Room" Type="MedicalModel.RoomEntity" Multiplicity="0..1" />
+          <End Role="Patient" Type="MedicalModel.PatientEntity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="RoomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Treatment_Patient">
+          <End Role="Patient" Type="MedicalModel.PatientEntity" Multiplicity="1" />
+          <End Role="Treatment" Type="MedicalModel.TreatmentEntity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Treatment">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TreatmentReport_Treatment">
+          <End Role="Treatment" Type="MedicalModel.TreatmentEntity" Multiplicity="1" />
+          <End Role="TreatmentReport" Type="MedicalModel.TreatmentReportEntity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Treatment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TreatmentReport">
+              <PropertyRef Name="TreatmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OperationMedicine">
+          <End Role="Medicine" Type="MedicalModel.MedicineEntity" Multiplicity="*" />
+          <End Role="Operation" Type="MedicalModel.OperationEntity" Multiplicity="*" />
+        </Association>
+        <Association Name="TreatmentReportDetail">
+          <End Role="Medicine" Type="MedicalModel.MedicineEntity" Multiplicity="*" />
+          <End Role="TreatmentReport" Type="MedicalModel.TreatmentReportEntity" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="MedicalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DoctorEntities" EntityType="MedicalModel.DoctorEntity" />
+          <EntitySet Name="MedicineEntities" EntityType="MedicalModel.MedicineEntity" />
+          <EntitySet Name="OperationEntities" EntityType="MedicalModel.OperationEntity" />
+          <EntitySet Name="PatientEntities" EntityType="MedicalModel.PatientEntity" />
+          <EntitySet Name="RoomEntities" EntityType="MedicalModel.RoomEntity" />
+          <EntitySet Name="TreatmentEntities" EntityType="MedicalModel.TreatmentEntity" />
+          <EntitySet Name="TreatmentReportEntities" EntityType="MedicalModel.TreatmentReportEntity" />
+          <EntitySet Name="TypeMedicineEntities" EntityType="MedicalModel.TypeMedicineEntity" />
+          <EntitySet Name="TypeOperationEntities" EntityType="MedicalModel.TypeOperationEntity" />
+          <AssociationSet Name="FK_Treatment_Doctor" Association="Self.FK_Treatment_Doctor">
+            <End Role="Doctor" EntitySet="DoctorEntities" />
+            <End Role="Treatment" EntitySet="TreatmentEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Medicine_TypeMedicine" Association="Self.FK_Medicine_TypeMedicine">
+            <End Role="TypeMedicine" EntitySet="TypeMedicineEntities" />
+            <End Role="Medicine" EntitySet="MedicineEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Operation_TypeOperation" Association="Self.FK_Operation_TypeOperation">
+            <End Role="TypeOperation" EntitySet="TypeOperationEntities" />
+            <End Role="Operation" EntitySet="OperationEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Treatment_Treatment" Association="Self.FK_Treatment_Treatment">
+            <End Role="Treatment" EntitySet="TreatmentEntities" />
+            <End Role="Operation" EntitySet="OperationEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patient_Room" Association="Self.FK_Patient_Room">
+            <End Role="Room" EntitySet="RoomEntities" />
+            <End Role="Patient" EntitySet="PatientEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Treatment_Patient" Association="Self.FK_Treatment_Patient">
+            <End Role="Patient" EntitySet="PatientEntities" />
+            <End Role="Treatment" EntitySet="TreatmentEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TreatmentReport_Treatment" Association="Self.FK_TreatmentReport_Treatment">
+            <End Role="Treatment" EntitySet="TreatmentEntities" />
+            <End Role="TreatmentReport" EntitySet="TreatmentReportEntities" />
+          </AssociationSet>
+          <AssociationSet Name="OperationMedicine" Association="Self.OperationMedicine">
+            <End Role="Medicine" EntitySet="MedicineEntities" />
+            <End Role="Operation" EntitySet="OperationEntities" />
+          </AssociationSet>
+          <AssociationSet Name="TreatmentReportDetail" Association="Self.TreatmentReportDetail">
+            <End Role="Medicine" EntitySet="MedicineEntities" />
+            <End Role="TreatmentReport" EntitySet="TreatmentReportEntities" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MedicalModelStoreContainer" CdmEntityContainer="MedicalEntities">
+          <EntitySetMapping Name="DoctorEntities">
+            <EntityTypeMapping TypeName="MedicalModel.DoctorEntity">
+              <MappingFragment StoreEntitySet="Doctor">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MedicineEntities">
+            <EntityTypeMapping TypeName="MedicalModel.MedicineEntity">
+              <MappingFragment StoreEntitySet="Medicine">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="MethodUsing" ColumnName="MethodUsing" />
+                <ScalarProperty Name="TypeMedicineId" ColumnName="TypeMedicineId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OperationEntities">
+            <EntityTypeMapping TypeName="MedicalModel.OperationEntity">
+              <MappingFragment StoreEntitySet="Operation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TypeOperationId" ColumnName="TypeOperationId" />
+                <ScalarProperty Name="TreatmentId" ColumnName="TreatmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientEntities">
+            <EntityTypeMapping TypeName="MedicalModel.PatientEntity">
+              <MappingFragment StoreEntitySet="Patient">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoomEntities">
+            <EntityTypeMapping TypeName="MedicalModel.RoomEntity">
+              <MappingFragment StoreEntitySet="Room">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TreatmentEntities">
+            <EntityTypeMapping TypeName="MedicalModel.TreatmentEntity">
+              <MappingFragment StoreEntitySet="Treatment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TreatmentReportEntities">
+            <EntityTypeMapping TypeName="MedicalModel.TreatmentReportEntity">
+              <MappingFragment StoreEntitySet="TreatmentReport">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TreatmentId" ColumnName="TreatmentId" />
+                <ScalarProperty Name="Conclusion" ColumnName="Conclusion" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeMedicineEntities">
+            <EntityTypeMapping TypeName="MedicalModel.TypeMedicineEntity">
+              <MappingFragment StoreEntitySet="TypeMedicine">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeOperationEntities">
+            <EntityTypeMapping TypeName="MedicalModel.TypeOperationEntity">
+              <MappingFragment StoreEntitySet="TypeOperation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="OperationMedicine" TypeName="MedicalModel.OperationMedicine" StoreEntitySet="OperationMedicine">
+            <EndProperty Name="Medicine">
+              <ScalarProperty Name="Id" ColumnName="MedicineId" />
+            </EndProperty>
+            <EndProperty Name="Operation">
+              <ScalarProperty Name="Id" ColumnName="OperationId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="TreatmentReportDetail" TypeName="MedicalModel.TreatmentReportDetail" StoreEntitySet="TreatmentReportDetail">
+            <EndProperty Name="Medicine">
+              <ScalarProperty Name="Id" ColumnName="MedicineId" />
+            </EndProperty>
+            <EndProperty Name="TreatmentReport">
+              <ScalarProperty Name="Id" ColumnName="TreatmentReportId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

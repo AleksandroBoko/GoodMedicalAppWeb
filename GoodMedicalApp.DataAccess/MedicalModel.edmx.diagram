@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="472bd9136bf74abfb9e5f43cdda7bcd3" Name="Diagram1">
+        <EntityTypeShape EntityType="MedicalModel.DoctorEntity" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalModel.MedicineEntity" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalModel.OperationEntity" Width="1.5" PointX="7.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalModel.PatientEntity" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalModel.RoomEntity" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalModel.TreatmentEntity" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalModel.TreatmentReportEntity" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalModel.TypeMedicineEntity" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalModel.TypeOperationEntity" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="MedicalModel.FK_Treatment_Doctor" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalModel.FK_Medicine_TypeMedicine" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalModel.FK_Operation_TypeOperation" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalModel.FK_Treatment_Treatment" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalModel.FK_Patient_Room" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalModel.FK_Treatment_Patient" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalModel.FK_TreatmentReport_Treatment" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalModel.OperationMedicine" ManuallyRouted="false" />
+        <AssociationConnector Association="MedicalModel.TreatmentReportDetail" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

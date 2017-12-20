@@ -5,6 +5,12 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodMedicalApp", "GoodMedicalApp\GoodMedicalApp.csproj", "{FF2C032A-9DD4-46D9-A840-829DB94B7681}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodMedicalApp.DataAccess", "GoodMedicalApp.DataAccess\GoodMedicalApp.DataAccess.csproj", "{48BB02C8-119F-4E37-BA86-D6C2B8CEA3B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodMedicalApp.BusinessServices", "GoodMedicalApp.BusinessServices\GoodMedicalApp.BusinessServices.csproj", "{3A90B64A-2EBE-4FB8-95D0-A2F32BBF4E3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodMedicalApp.Domain", "GoodMedicalApp.Domain\GoodMedicalApp.Domain.csproj", "{9549B74C-BDF5-4563-8523-706C75BE20A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{FF2C032A-9DD4-46D9-A840-829DB94B7681}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF2C032A-9DD4-46D9-A840-829DB94B7681}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF2C032A-9DD4-46D9-A840-829DB94B7681}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48BB02C8-119F-4E37-BA86-D6C2B8CEA3B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48BB02C8-119F-4E37-BA86-D6C2B8CEA3B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48BB02C8-119F-4E37-BA86-D6C2B8CEA3B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48BB02C8-119F-4E37-BA86-D6C2B8CEA3B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A90B64A-2EBE-4FB8-95D0-A2F32BBF4E3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A90B64A-2EBE-4FB8-95D0-A2F32BBF4E3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A90B64A-2EBE-4FB8-95D0-A2F32BBF4E3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A90B64A-2EBE-4FB8-95D0-A2F32BBF4E3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9549B74C-BDF5-4563-8523-706C75BE20A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9549B74C-BDF5-4563-8523-706C75BE20A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9549B74C-BDF5-4563-8523-706C75BE20A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9549B74C-BDF5-4563-8523-706C75BE20A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
