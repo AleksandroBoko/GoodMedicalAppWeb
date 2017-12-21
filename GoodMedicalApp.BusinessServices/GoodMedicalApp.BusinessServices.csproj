@@ -51,6 +51,25 @@
     <Compile Include="Mappers\Implementation\TypeMedicineMapper.cs" />
     <Compile Include="Mappers\Implementation\TypeOperationMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IDoctorService.cs" />
+    <Compile Include="Services\IMedicineService.cs" />
+    <Compile Include="Services\Implementation\DoctorService.cs" />
+    <Compile Include="Services\Implementation\MedicineService.cs" />
+    <Compile Include="Services\Implementation\OperationService.cs" />
+    <Compile Include="Services\Implementation\PatientService.cs" />
+    <Compile Include="Services\Implementation\RoomService.cs" />
+    <Compile Include="Services\Implementation\TreatmentReportService.cs" />
+    <Compile Include="Services\Implementation\TreatmentService.cs" />
+    <Compile Include="Services\Implementation\TypeMedicineService.cs" />
+    <Compile Include="Services\Implementation\TypeOperationService.cs" />
+    <Compile Include="Services\IOperationService.cs" />
+    <Compile Include="Services\IPatientService.cs" />
+    <Compile Include="Services\IRoomService.cs" />
+    <Compile Include="Services\IService.cs" />
+    <Compile Include="Services\ITreatmentReportService.cs" />
+    <Compile Include="Services\ITreatmentService.cs" />
+    <Compile Include="Services\ITypeMedicineService.cs" />
+    <Compile Include="Services\ITypeOperationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GoodMedicalApp.DataAccess\GoodMedicalApp.DataAccess.csproj">
