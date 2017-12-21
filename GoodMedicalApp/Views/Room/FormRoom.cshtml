@@ -1,0 +1,7 @@
+﻿@model GoodMedicalApp.Domain.Models.Room
+@using (Html.BeginForm("CreateRoom", "Room", FormMethod.Post))
+{
+    <p>@Html.LabelFor(x => x.Number)</p>
+    <p>@Html.TextBoxFor(x => x.Number, "Number")</p>
+    <p><input type="submit" value="Send" /></p>
+}

@@ -1,0 +1,21 @@
+﻿@using GoodMedicalApp.Domain.Models
+@model IList<Room>
+
+<table border="1">
+        <caption>Rooms</caption>
+    <tr>
+        <th>Id</th>
+        <th>Number of room</th>
+    </tr>
+    @foreach (var entity in Model)
+    {
+        <tr>
+            <td>@entity.Id</td>
+            <td>@entity.Number</td>
+        </tr>
+    }
+</table>
+
+<div>
+    @Html.ActionLink("Add room", "FormRoom", "Room")
+</div>

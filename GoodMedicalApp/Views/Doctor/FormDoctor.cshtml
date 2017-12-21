@@ -1,0 +1,11 @@
+﻿@model GoodMedicalApp.Domain.Models.Doctor
+@using (Html.BeginForm("CreateDoctor", "Doctor", FormMethod.Post))
+{
+    <p>@Html.LabelFor(x => x.FirstName)</p>
+    <p>@Html.TextBoxFor(x => x.FirstName, "Name")</p>
+    <p>@Html.LabelFor(x => x.LastName)</p>
+    <p>@Html.TextBoxFor(x => x.LastName, "Last Name")</p>
+    <p>@Html.LabelFor(x => x.Qualification)</p>
+    <p>@Html.TextBoxFor(x => x.Qualification,"Qualification")</p>
+    <p><input type="submit" value="Send" /></p>
+}

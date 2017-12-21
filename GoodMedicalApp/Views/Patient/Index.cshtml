@@ -1,0 +1,39 @@
+﻿@using GoodMedicalApp.Domain.Models
+@model IList<Patient>
+
+<table border="1">
+    <caption>
+        Patients
+    </caption>
+    <tr>
+        <th>Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Age</th>
+        <th>Room number</th>
+    </tr>
+    @foreach (var entity in Model)
+    {
+        <tr>
+            <td>@entity.Id</td>
+            <td>@entity.FirstName</td>
+            <td>@entity.LastName</td>
+            <td>@entity.Age</td>
+
+            @if (entity.HospitalRoom != null)
+            {
+                <td>
+                    @entity.HospitalRoom.Number
+                </td>
+            }
+            else
+            {
+                <td></td>
+            }
+        </tr>
+    }
+</table>
+
+<div>
+    @Html.ActionLink("Add patient", "FormPatient", "Patient")
+</div>

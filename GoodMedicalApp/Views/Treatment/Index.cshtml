@@ -1,0 +1,45 @@
+﻿@using GoodMedicalApp.Domain.Models
+@model IList<Treatment>
+
+@helper GetDoctorFullName(IList<Doctor> items, int id)
+{
+    var item = items.FirstOrDefault(x => x.Id == id);
+    if(item != null)
+    {
+        <td>@item.FirstName @item.LastName</td>
+    }
+}
+
+@helper GetPatientFullName(IList<Patient> items, int id)
+{
+    var item = items.FirstOrDefault(x => x.Id == id);
+    if (item != null)
+    {
+        <td>@item.FirstName @item.LastName</td>
+    }
+}
+
+<table border="1">
+    <caption>
+        Treatments
+    </caption>
+    <tr>
+        <th>Id</th>
+        <th>Doctor</th>
+        <th>Patient</th>
+        <th>Date start</th>
+    </tr>
+    @foreach(var treatment in Model)
+    {
+        <tr>
+            <td>@treatment.Id</td>            
+            @GetDoctorFullName(ViewBag.doctors, treatment.DoctorId)
+            @GetPatientFullName(ViewBag.patients, treatment.PatientId)
+            <td>@treatment.StartDate</td>
+        </tr>
+    }
+</table>
+
+<div>
+    @Html.ActionLink("Add treatment", "FormTreatment","Treatment")
+</div>

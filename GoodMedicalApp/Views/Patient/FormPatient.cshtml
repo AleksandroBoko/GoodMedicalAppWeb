@@ -1,0 +1,14 @@
+﻿@model GoodMedicalApp.Domain.Models.Patient
+@using (Html.BeginForm("CreatePatient", "Patient", FormMethod.Post))
+{
+    <p>@Html.LabelFor(x => x.FirstName)</p>
+    <p>@Html.TextBoxFor(x => x.FirstName, "Name")</p>
+    <p>@Html.LabelFor(x => x.LastName)</p>
+    <p>@Html.TextBoxFor(x => x.LastName, "Last Name")</p>
+    <p>@Html.LabelFor(x => x.Age)</p>
+    <p>@Html.TextBoxFor(x => x.Age, "Age")</p>    
+    <p>@Html.Label("Room")</p>
+    <p>@Html.DropDownListFor(x => x.HospitalRoom.Id, ViewBag.selectList as SelectList)</p>
+    <p><input type="submit" value="Send" /></p>
+}
+
