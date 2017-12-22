@@ -1,4 +1,6 @@
-﻿using GoodMedicalApp.DataAccess;
+﻿using GoodMedicalApp.BusinessServices.Services.Implementation;
+using GoodMedicalApp.DataAccess;
+using GoodMedicalApp.DataAccess.DataAccess.Implementation;
 using GoodMedicalApp.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -32,19 +34,17 @@ namespace GoodMedicalApp.BusinessServices.Mappers.Implementation
                     typeOperationMapper.MapToEntity(operation.CurrentTypeOperation, typeOperationEntity);
                     operationEntity.TypeOperationId = typeOperationEntity.Id;
                 }
-                
-                //if(operation.Medicines.Any())
-                //{
-                //    var entityMedicines = new List<MedicineEntity>();
-                //    foreach(var medicine in operation.Medicines)
-                //    {
-                //        var medicineEntity = new MedicineEntity();
-                //        medicineMapper.MapToEntity(medicine, medicineEntity);
-                //        entityMedicines.Add(medicineEntity);
-                //    }
 
-                //    operationEntity.Medicines = entityMedicines;
-                //}
+                if (operation.Medicines.Any())
+                {
+                    var medcicineRepository = MedicineRepository.GetInstance();
+
+                    foreach (var medicine in operation.Medicines)
+                    {
+                        var medicineEntity = medcicineRepository.GetItemById(medicine.Id);                        
+                        operationEntity.Medicines.Add(medicineEntity);
+                    }                    
+                }
             }
         }
 
