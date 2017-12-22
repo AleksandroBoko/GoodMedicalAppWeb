@@ -43,10 +43,12 @@
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\Medicine.cs" />
     <Compile Include="Models\Operation.cs" />
+    <Compile Include="Models\OperationTransfer.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\Treatment.cs" />
     <Compile Include="Models\TreatmentReport.cs" />
+    <Compile Include="Models\TreatmentReportTransfer.cs" />
     <Compile Include="Models\TypeMedicine.cs" />
     <Compile Include="Models\TypeOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

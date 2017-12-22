@@ -1,0 +1,16 @@
+﻿@model GoodMedicalApp.Domain.Models.TreatmentReportTransfer
+@using (Html.BeginForm("CreateTreatmentReport", "TreatmentReport", FormMethod.Post))
+{
+    <p>@Html.LabelFor(x => x.Conclusion, "Conclusion")</p>
+    <p>@Html.TextBoxFor(x => x.Conclusion, "Conclusion")</p>
+    <p>@Html.LabelFor(x => x.CurrentTreatment.Id, "Treatment")</p>
+    <p>@Html.DropDownListFor(x => x.CurrentTreatment.Id, ViewBag.treatments as SelectList)</p>
+    <p>@Html.LabelFor(x => x.Comment, "Comment")</p>
+    <p>@Html.TextAreaFor(x => x.Comment)</p>
+    <p>@Html.LabelFor(x => x.Medicines)</p>
+    <p>@Html.ListBoxFor(x => x.Medicines, new MultiSelectList(ViewBag.medicines, "Id", "Name"))</p>
+    <p><input type="submit" value="Send" /></p>
+}
+
+
+

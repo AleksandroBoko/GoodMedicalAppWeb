@@ -1,0 +1,8 @@
+﻿@model GoodMedicalApp.Domain.Models.TypeOperation
+@using (Html.BeginForm("CreateTypeOperation", "TypeOperation", FormMethod.Post))
+{
+    <p>@Html.LabelFor(x => x.Name)</p>
+    <p>@Html.TextBoxFor(x => x.Name, "Name")</p>
+    <p><input type="submit" value="Send" /></p>
+}
+

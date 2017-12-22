@@ -1,0 +1,13 @@
+﻿@model GoodMedicalApp.Domain.Models.OperationTransfer
+@using (Html.BeginForm("CreateOperation", "Operation", FormMethod.Post))
+{
+    <p>@Html.LabelFor(x => x.TreatmentId, "Treatment's Id")</p>
+    <p>@Html.DropDownListFor(x => x.TreatmentId, ViewBag.treatments as SelectList)</p>
+    <p>@Html.LabelFor(x => x.CurrentTypeOperation.Id, "Operation's type")</p>
+    <p>@Html.DropDownListFor(x => x.CurrentTypeOperation.Id, ViewBag.typeOperations as SelectList)</p>
+    <p>@Html.LabelFor(x => x.Medicines)</p>
+    <p>@Html.ListBoxFor(x => x.Medicines, new MultiSelectList(ViewBag.medicines, "Id", "Name"))</p>
+    <p><input type="submit" value="Send" /></p>
+}
+
+

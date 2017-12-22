@@ -29,8 +29,8 @@ namespace GoodMedicalApp.BusinessServices.Mappers.Implementation
                 if (medicine.CurrentTypeMedicine != null)
                 {
                     var typeMedicineEntity = new TypeMedicineEntity();
-                    typeMedicineMapper.MapToEntity(medicine.CurrentTypeMedicine, typeMedicineEntity);
-                    medicineEntity.TypeMedicine = typeMedicineEntity;
+                    typeMedicineMapper.MapToEntity(medicine.CurrentTypeMedicine, typeMedicineEntity);                    
+                    medicineEntity.TypeMedicineId = typeMedicineEntity.Id;
                 }
             }
         }

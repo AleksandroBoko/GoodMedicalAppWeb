@@ -30,21 +30,21 @@ namespace GoodMedicalApp.BusinessServices.Mappers.Implementation
                 {
                     var typeOperationEntity = new TypeOperationEntity();
                     typeOperationMapper.MapToEntity(operation.CurrentTypeOperation, typeOperationEntity);
-                    operationEntity.TypeOperation = typeOperationEntity;
+                    operationEntity.TypeOperationId = typeOperationEntity.Id;
                 }
                 
-                if(operation.Medicines.Any())
-                {
-                    var entityMedicines = new List<MedicineEntity>();
-                    foreach(var medicine in operation.Medicines)
-                    {
-                        var medicineEntity = new MedicineEntity();
-                        medicineMapper.MapToEntity(medicine, medicineEntity);
-                        entityMedicines.Add(medicineEntity);
-                    }
+                //if(operation.Medicines.Any())
+                //{
+                //    var entityMedicines = new List<MedicineEntity>();
+                //    foreach(var medicine in operation.Medicines)
+                //    {
+                //        var medicineEntity = new MedicineEntity();
+                //        medicineMapper.MapToEntity(medicine, medicineEntity);
+                //        entityMedicines.Add(medicineEntity);
+                //    }
 
-                    operationEntity.Medicines = entityMedicines;
-                }
+                //    operationEntity.Medicines = entityMedicines;
+                //}
             }
         }
 

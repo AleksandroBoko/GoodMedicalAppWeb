@@ -199,9 +199,14 @@
     <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MedicineController.cs" />
+    <Compile Include="Controllers\OperationController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\TreatmentController.cs" />
+    <Compile Include="Controllers\TreatmentReportController.cs" />
+    <Compile Include="Controllers\TypeMedicineController.cs" />
+    <Compile Include="Controllers\TypeOperationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -279,6 +284,16 @@
     <Content Include="Views\Room\Index.cshtml" />
     <Content Include="Views\Treatment\FormTreatment.cshtml" />
     <Content Include="Views\Treatment\Index.cshtml" />
+    <Content Include="Views\TypeOperation\Index.cshtml" />
+    <Content Include="Views\TypeOperation\FormTypeOperation.cshtml" />
+    <Content Include="Views\TypeMedicine\Index.cshtml" />
+    <Content Include="Views\TypeMedicine\FormTypeMedicine.cshtml" />
+    <Content Include="Views\Medicine\Index.cshtml" />
+    <Content Include="Views\Medicine\FormMedicine.cshtml" />
+    <Content Include="Views\Operation\Index.cshtml" />
+    <Content Include="Views\Operation\FormOperation.cshtml" />
+    <Content Include="Views\TreatmentReport\Index.cshtml" />
+    <Content Include="Views\TreatmentReport\FormTreatmentReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
