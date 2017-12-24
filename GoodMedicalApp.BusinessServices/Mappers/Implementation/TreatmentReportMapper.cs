@@ -1,10 +1,8 @@
 ﻿using GoodMedicalApp.DataAccess;
+using GoodMedicalApp.DataAccess.DataAccess.Implementation;
 using GoodMedicalApp.Domain.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GoodMedicalApp.BusinessServices.Mappers.Implementation
 {
@@ -64,18 +62,16 @@ namespace GoodMedicalApp.BusinessServices.Mappers.Implementation
                     treatmentReportEntity.TreatmentId = treatmentEntity.Id;
                 }
 
-                //if (treatmentReport.Medicines.Any())
-                //{
-                //    var medicineEntities = new List<MedicineEntity>();
-                //    foreach (var medicine in treatmentReport.Medicines)
-                //    {
-                //        var medicineEntity = new MedicineEntity();
-                //        medicineMapper.MapToEntity(medicine, medicineEntity);
-                //        medicineEntities.Add(medicineEntity);
-                //    }
-
-                //    treatmentReportEntity.Medicines = medicineEntities;
-                //}
+                if (treatmentReport.Medicines.Any())
+                {
+                    var medicineRepository = MedicineRepository.GetInstance();
+                
+                    foreach (var medicine in treatmentReport.Medicines)
+                    {
+                        var medicineEntity = medicineRepository.GetItemById(medicine.Id);
+                        treatmentReportEntity.Medicines.Add(medicineEntity);
+                    }
+                }
             }
         }
     }

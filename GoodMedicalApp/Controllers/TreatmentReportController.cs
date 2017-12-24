@@ -54,7 +54,7 @@ namespace GoodMedicalApp.Controllers
                 treatmentReport.Medicines = new List<Medicine>();
                 foreach (var id in treatmentReportTransfer.Medicines)
                 {
-                    var medicine = new Medicine() { Id = id };
+                    var medicine = medicineService.GetItemById(id);
                     treatmentReport.Medicines.Add(medicine);
                 }
             }
