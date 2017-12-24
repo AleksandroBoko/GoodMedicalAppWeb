@@ -243,18 +243,8 @@ warning 6002: The table/view 'medical.dbo.TreatmentReportDetail' does not have a
           <EntitySet Name="TreatmentReport" EntityType="Self.TreatmentReport" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeMedicine" EntityType="Self.TypeMedicine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeOperation" EntityType="Self.TypeOperation" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OperationMedicine" EntityType="Self.OperationMedicine" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [OperationMedicine].[OperationId] AS [OperationId], 
-    [OperationMedicine].[MedicineId] AS [MedicineId]
-    FROM [dbo].[OperationMedicine] AS [OperationMedicine]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="TreatmentReportDetail" EntityType="Self.TreatmentReportDetail" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TreatmentReportDetail].[TreatmentReportId] AS [TreatmentReportId], 
-    [TreatmentReportDetail].[MedicineId] AS [MedicineId]
-    FROM [dbo].[TreatmentReportDetail] AS [TreatmentReportDetail]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="OperationMedicine" EntityType="Self.OperationMedicine" Schema="dbo" store:Type="Tables" />          
+          <EntitySet Name="TreatmentReportDetail" EntityType="Self.TreatmentReportDetail" Schema="dbo" store:Type="Tables" />            
           <AssociationSet Name="FK_Medicine_TypeMedicine" Association="Self.FK_Medicine_TypeMedicine">
             <End Role="TypeMedicine" EntitySet="TypeMedicine" />
             <End Role="Medicine" EntitySet="Medicine" />

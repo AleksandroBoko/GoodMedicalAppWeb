@@ -15,7 +15,17 @@
             <td>@entity.Id</td>
             <td>@entity.TreatmentId</td>
             <td>@entity.CurrentTypeOperation.Name</td>
-            <td>@entity.Medicines</td>
+            <td>
+                @if (entity.Medicines != null && entity.Medicines.Any())
+                {
+                    <ul>
+                        @foreach (var medicine in entity.Medicines)
+                        {
+                            <li>@medicine.Name</li>
+                        }
+                    </ul>
+                }
+            </td>
         </tr>
     }
 </table>
