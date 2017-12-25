@@ -62,7 +62,7 @@ namespace GoodMedicalApp.BusinessServices.Mappers.Implementation
                     treatmentReportEntity.TreatmentId = treatmentEntity.Id;
                 }
 
-                if (treatmentReport.Medicines.Any())
+                if (treatmentReport.Medicines != null && treatmentReport.Medicines.Any())
                 {
                     var medicineRepository = MedicineRepository.GetInstance();
                 

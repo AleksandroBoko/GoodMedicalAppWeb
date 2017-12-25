@@ -31,12 +31,12 @@ namespace GoodMedicalApp.Controllers
 
         public ActionResult FormTreatmentReport()
         {
-            var treatments = treatmentService.GetAll();            
+            var treatments = treatmentService.GetAll();
             var medicines = medicineService.GetAll();
 
-            var selectListTreatments = new SelectList(treatments, "Id", "Id");   
+            var selectListTreatments = new SelectList(treatments, "Id", "Id");
 
-            ViewBag.treatments = selectListTreatments;            
+            ViewBag.treatments = selectListTreatments;
             ViewBag.medicines = medicines;
 
             return View();
@@ -47,7 +47,7 @@ namespace GoodMedicalApp.Controllers
             var treatmentReport = new TreatmentReport();
             treatmentReport.Conclusion = treatmentReportTransfer.Conclusion;
             treatmentReport.Comment = treatmentReportTransfer.Comment;
-            treatmentReport.CurrentTreatment = new Treatment() { Id = treatmentReportTransfer.CurrentTreatment.Id};
+            treatmentReport.CurrentTreatment = new Treatment() { Id = treatmentReportTransfer.CurrentTreatment.Id };
 
             if (treatmentReportTransfer.Medicines.Any())
             {
@@ -62,6 +62,22 @@ namespace GoodMedicalApp.Controllers
             treatmentReportService.Add(treatmentReport);
             treatmentReportService.Save();
             return Content("<p>The treatment's report was created successfully!</p>");
+        }
+
+        public ContentResult Remove(int id)
+        {
+            var treatmentreport = treatmentReportService.GetItemById(id);
+            if (treatmentreport != null)
+            {
+                treatmentReportService.Remove(treatmentreport);
+                treatmentReportService.Save();
+                return Content("<p>The treatment's report was removed successfully!</p>");
+            }
+            else
+            {
+                return Content("<p>The treatment's report wasn't found!</p>");
+            }
+
         }
     }
 }

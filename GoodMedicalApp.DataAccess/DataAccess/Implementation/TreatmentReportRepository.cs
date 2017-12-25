@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GoodMedicalApp.DataAccess.DataAccess.Implementation
 {
-    public class TreatmentReportRepository:IRepository<TreatmentReportEntity>
+    public class TreatmentReportRepository : IRepository<TreatmentReportEntity>
     {
         private TreatmentReportRepository()
         {
@@ -53,12 +53,17 @@ namespace GoodMedicalApp.DataAccess.DataAccess.Implementation
                 return;
             }
 
-            medicalEntity.TreatmentReportEntities.Remove(item);
+            var treatmentReport = medicalEntity.TreatmentReportEntities.FirstOrDefault(x => x.Id == item.Id);
+            if (treatmentReport != null)
+            {
+                medicalEntity.TreatmentReportEntities.Remove(treatmentReport);
+            }
         }
 
         public TreatmentReportEntity GetItemById(int id)
         {
-            if (medicalEntity != null && medicalEntity.TreatmentReportEntities.Any())
+            if (medicalEntity != null && medicalEntity.TreatmentReportEntities != null
+                    && medicalEntity.TreatmentReportEntities.Any())
             {
                 return medicalEntity.TreatmentReportEntities.FirstOrDefault(x => x.Id == id);
             }
