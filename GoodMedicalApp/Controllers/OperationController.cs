@@ -68,5 +68,21 @@ namespace GoodMedicalApp.Controllers
             return Content("<p>The operation was created successfully!</p>");
         }
 
+        public ContentResult Remove(int id)
+        {
+            var operation = operationService.GetItemById(id);
+            if (operation != null)
+            {
+                operationService.Remove(operation);
+                operationService.Save();
+                return Content("<p>The operation was removed successfully!</p>");
+            }
+            else
+            {
+                return Content("<p>The operation wasn't found!</p>");
+            }
+
+        }
+
     }
 }
