@@ -6,12 +6,14 @@
     <tr>
         <th>Id</th>
         <th>Name of the type</th>
+        <th>Actions</th>
     </tr>
     @foreach (var entity in Model)
     {
         <tr>
             <td>@entity.Id</td>
             <td>@entity.Name</td>
+            <td>@Html.ActionLink("Remove", "Remove", "TypeMedicine", new { id = entity.Id }, null)</td>
         </tr>
     }
 </table>

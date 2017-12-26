@@ -102,7 +102,9 @@ warning 6002: The table/view 'medical.dbo.TreatmentReportDetail' does not have a
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <Association Name="FK_Medicine_TypeMedicine">
-          <End Role="TypeMedicine" Type="Self.TypeMedicine" Multiplicity="1" />
+          <End Role="TypeMedicine" Type="Self.TypeMedicine" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Medicine" Type="Self.Medicine" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TypeMedicine">
@@ -126,7 +128,9 @@ warning 6002: The table/view 'medical.dbo.TreatmentReportDetail' does not have a
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OperationMedicine_Medicine">
-          <End Role="Medicine" Type="Self.Medicine" Multiplicity="1" />
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="OperationMedicine" Type="Self.OperationMedicine" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Medicine">
@@ -216,7 +220,9 @@ warning 6002: The table/view 'medical.dbo.TreatmentReportDetail' does not have a
           </ReferentialConstraint>
         </Association>
         <Association Name="Fk_TreatmentReportDetail_Medicine">
-          <End Role="Medicine" Type="Self.Medicine" Multiplicity="1" />
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="TreatmentReportDetail" Type="Self.TreatmentReportDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Medicine">
@@ -252,7 +258,7 @@ warning 6002: The table/view 'medical.dbo.TreatmentReportDetail' does not have a
           <EntitySet Name="TypeMedicine" EntityType="Self.TypeMedicine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeOperation" EntityType="Self.TypeOperation" Schema="dbo" store:Type="Tables" />
 		  <EntitySet Name="OperationMedicine" EntityType="Self.OperationMedicine" Schema="dbo" store:Type="Tables" />          
-          <EntitySet Name="TreatmentReportDetail" EntityType="Self.TreatmentReportDetail" Schema="dbo" store:Type="Tables" />                      
+          <EntitySet Name="TreatmentReportDetail" EntityType="Self.TreatmentReportDetail" Schema="dbo" store:Type="Tables" />  		  
           <AssociationSet Name="FK_Medicine_TypeMedicine" Association="Self.FK_Medicine_TypeMedicine">
             <End Role="TypeMedicine" EntitySet="TypeMedicine" />
             <End Role="Medicine" EntitySet="Medicine" />

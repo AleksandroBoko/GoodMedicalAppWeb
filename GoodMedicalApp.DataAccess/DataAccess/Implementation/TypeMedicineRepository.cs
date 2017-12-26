@@ -53,7 +53,20 @@ namespace GoodMedicalApp.DataAccess.DataAccess.Implementation
                 return;
             }
 
-            medicalEntity.TypeMedicineEntities.Remove(item);
+            var typeMedicine = medicalEntity.TypeMedicineEntities.FirstOrDefault(x => x.Id == item.Id);
+            if (typeMedicine != null)
+            {
+                if (typeMedicine.Medicines != null && typeMedicine.Medicines.Any())
+                {
+                    while (typeMedicine.Medicines.Count > 0)
+                    {
+                        var medicine = typeMedicine.Medicines.LastOrDefault();
+                        medicalEntity.Entry(medicine).State = EntityState.Deleted;
+                    }
+                }
+
+                medicalEntity.TypeMedicineEntities.Remove(typeMedicine);
+            }
         }
 
         public TypeMedicineEntity GetItemById(int id)
