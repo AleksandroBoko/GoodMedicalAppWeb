@@ -9,7 +9,8 @@
         <th>Id</th>
         <th>First Name</th>
         <th>Last Name</th>
-        <th>Qualification</th>        
+        <th>Qualification</th> 
+        <th>Actions</th>       
     </tr>
     @foreach (var entity in Model)
     {
@@ -18,6 +19,7 @@
             <td>@entity.FirstName</td>
             <td>@entity.LastName</td>
             <td>@entity.Qualification</td>
+            <td>@Html.ActionLink("Remove", "Remove", "Doctor", new { id = entity.Id }, null)</td>
         </tr>
     }
 </table>

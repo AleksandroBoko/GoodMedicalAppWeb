@@ -170,7 +170,9 @@ warning 6002: The table/view 'medical.dbo.TreatmentReportDetail' does not have a
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Treatment_Doctor">
-          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Treatment" Type="Self.Treatment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Doctor">
@@ -182,7 +184,9 @@ warning 6002: The table/view 'medical.dbo.TreatmentReportDetail' does not have a
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Treatment_Patient">
-          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Treatment" Type="Self.Treatment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Patient">
@@ -260,8 +264,8 @@ warning 6002: The table/view 'medical.dbo.TreatmentReportDetail' does not have a
           <EntitySet Name="TypeMedicine" EntityType="Self.TypeMedicine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeOperation" EntityType="Self.TypeOperation" Schema="dbo" store:Type="Tables" />
 		  <EntitySet Name="OperationMedicine" EntityType="Self.OperationMedicine" Schema="dbo" store:Type="Tables" />          
-          <EntitySet Name="TreatmentReportDetail" EntityType="Self.TreatmentReportDetail" Schema="dbo" store:Type="Tables" />  		  
-		  <AssociationSet Name="FK_Medicine_TypeMedicine" Association="Self.FK_Medicine_TypeMedicine">
+          <EntitySet Name="TreatmentReportDetail" EntityType="Self.TreatmentReportDetail" Schema="dbo" store:Type="Tables" />  		            
+          <AssociationSet Name="FK_Medicine_TypeMedicine" Association="Self.FK_Medicine_TypeMedicine">
             <End Role="TypeMedicine" EntitySet="TypeMedicine" />
             <End Role="Medicine" EntitySet="Medicine" />
           </AssociationSet>

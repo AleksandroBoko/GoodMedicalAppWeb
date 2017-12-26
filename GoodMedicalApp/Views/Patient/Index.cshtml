@@ -11,6 +11,7 @@
         <th>Last Name</th>
         <th>Age</th>
         <th>Room number</th>
+        <th>Actions</th>       
     </tr>
     @foreach (var entity in Model)
     {
@@ -22,14 +23,14 @@
 
             @if (entity.HospitalRoom != null)
             {
-                <td>
-                    @entity.HospitalRoom.Number
-                </td>
+                <td>@entity.HospitalRoom.Number</td>
             }
             else
             {
                 <td></td>
             }
+
+            <td>@Html.ActionLink("Remove", "Remove", "Patient", new { id = entity.Id }, null)</td>
         </tr>
     }
 </table>

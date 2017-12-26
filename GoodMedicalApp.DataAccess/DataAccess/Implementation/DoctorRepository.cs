@@ -53,7 +53,21 @@ namespace GoodMedicalApp.DataAccess.DataAccess.Implementation
                 return;
             }
 
-            medicalEntity.DoctorEntities.Remove(item);
+            var treatmentRepository = TreatmentRepository.GetInstance();
+            var doctor = medicalEntity.DoctorEntities.FirstOrDefault(x => x.Id == item.Id);
+            if (doctor != null)
+            {
+                if (doctor.Treatments != null && doctor.Treatments.Any())
+                {
+                    while (doctor.Treatments.Count > 0)
+                    {
+                        var treatment = doctor.Treatments.LastOrDefault();
+                        treatmentRepository.Delete(treatment);
+                    }
+                }
+
+                medicalEntity.DoctorEntities.Remove(doctor);
+            }
         }
 
         public DoctorEntity GetItemById(int id)
