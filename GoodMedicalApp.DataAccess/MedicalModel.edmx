@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MedicalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MedicalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Doctor">
           <Key>
             <PropertyRef Name="Id" />
@@ -138,7 +138,9 @@ warning 6002: The table/view 'medical.dbo.TreatmentReportDetail' does not have a
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OperationMedicine_Operation">
-          <End Role="Operation" Type="Self.Operation" Multiplicity="1" />
+          <End Role="Operation" Type="Self.Operation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="OperationMedicine" Type="Self.OperationMedicine" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Operation">
@@ -186,7 +188,9 @@ warning 6002: The table/view 'medical.dbo.TreatmentReportDetail' does not have a
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Treatment_Treatment">
-          <End Role="Treatment" Type="Self.Treatment" Multiplicity="1" />
+          <End Role="Treatment" Type="Self.Treatment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Operation" Type="Self.Operation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Treatment">
@@ -198,7 +202,9 @@ warning 6002: The table/view 'medical.dbo.TreatmentReportDetail' does not have a
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TreatmentReport_Treatment">
-          <End Role="Treatment" Type="Self.Treatment" Multiplicity="1" />
+          <End Role="Treatment" Type="Self.Treatment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="TreatmentReport" Type="Self.TreatmentReport" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Treatment">
@@ -222,7 +228,9 @@ warning 6002: The table/view 'medical.dbo.TreatmentReportDetail' does not have a
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TreatmentReportDetail_TreatmentReport">
-          <End Role="TreatmentReport" Type="Self.TreatmentReport" Multiplicity="1" />
+          <End Role="TreatmentReport" Type="Self.TreatmentReport" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="TreatmentReportDetail" Type="Self.TreatmentReportDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TreatmentReport">
@@ -243,8 +251,8 @@ warning 6002: The table/view 'medical.dbo.TreatmentReportDetail' does not have a
           <EntitySet Name="TreatmentReport" EntityType="Self.TreatmentReport" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeMedicine" EntityType="Self.TypeMedicine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeOperation" EntityType="Self.TypeOperation" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OperationMedicine" EntityType="Self.OperationMedicine" Schema="dbo" store:Type="Tables" />          
-          <EntitySet Name="TreatmentReportDetail" EntityType="Self.TreatmentReportDetail" Schema="dbo" store:Type="Tables" />            
+		  <EntitySet Name="OperationMedicine" EntityType="Self.OperationMedicine" Schema="dbo" store:Type="Tables" />          
+          <EntitySet Name="TreatmentReportDetail" EntityType="Self.TreatmentReportDetail" Schema="dbo" store:Type="Tables" />                      
           <AssociationSet Name="FK_Medicine_TypeMedicine" Association="Self.FK_Medicine_TypeMedicine">
             <End Role="TypeMedicine" EntitySet="TypeMedicine" />
             <End Role="Medicine" EntitySet="Medicine" />
@@ -290,8 +298,7 @@ warning 6002: The table/view 'medical.dbo.TreatmentReportDetail' does not have a
             <End Role="TreatmentReportDetail" EntitySet="TreatmentReportDetail" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MedicalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
