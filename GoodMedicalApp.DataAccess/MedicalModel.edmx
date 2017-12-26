@@ -116,7 +116,9 @@ warning 6002: The table/view 'medical.dbo.TreatmentReportDetail' does not have a
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Operation_TypeOperation">
-          <End Role="TypeOperation" Type="Self.TypeOperation" Multiplicity="1" />
+          <End Role="TypeOperation" Type="Self.TypeOperation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Operation" Type="Self.Operation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TypeOperation">
@@ -259,7 +261,7 @@ warning 6002: The table/view 'medical.dbo.TreatmentReportDetail' does not have a
           <EntitySet Name="TypeOperation" EntityType="Self.TypeOperation" Schema="dbo" store:Type="Tables" />
 		  <EntitySet Name="OperationMedicine" EntityType="Self.OperationMedicine" Schema="dbo" store:Type="Tables" />          
           <EntitySet Name="TreatmentReportDetail" EntityType="Self.TreatmentReportDetail" Schema="dbo" store:Type="Tables" />  		  
-          <AssociationSet Name="FK_Medicine_TypeMedicine" Association="Self.FK_Medicine_TypeMedicine">
+		  <AssociationSet Name="FK_Medicine_TypeMedicine" Association="Self.FK_Medicine_TypeMedicine">
             <End Role="TypeMedicine" EntitySet="TypeMedicine" />
             <End Role="Medicine" EntitySet="Medicine" />
           </AssociationSet>

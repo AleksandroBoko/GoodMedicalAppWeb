@@ -37,5 +37,20 @@ namespace GoodMedicalApp.Controllers
             typeOperationService.Save();
             return Content("<p>The room was created successfully!</p>");
         }
+
+        public ContentResult Remove(int id)
+        {
+            var typeOperation = typeOperationService.GetItemById(id);
+            if (typeOperation != null)
+            {
+                typeOperationService.Remove(typeOperation);
+                typeOperationService.Save();
+                return Content("<p>The operation's type was removed successfully!</p>");
+            }
+            else
+            {
+                return Content("<p>The operation's type wasn't found!</p>");
+            }
+        }
     }
 }
