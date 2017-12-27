@@ -10,7 +10,7 @@
         <th>First Name</th>
         <th>Last Name</th>
         <th>Qualification</th> 
-        <th>Actions</th>       
+        <th colspan="2">Actions</th>       
     </tr>
     @foreach (var entity in Model)
     {
@@ -20,6 +20,7 @@
             <td>@entity.LastName</td>
             <td>@entity.Qualification</td>
             <td>@Html.ActionLink("Remove", "Remove", "Doctor", new { id = entity.Id }, null)</td>
+            <td>@Html.ActionLink("Edit", "FormUpdate", "Doctor", new { id = entity.Id }, null)</td>
         </tr>
     }
 </table>

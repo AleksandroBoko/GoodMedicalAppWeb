@@ -1,0 +1,13 @@
+﻿@model GoodMedicalApp.Domain.Models.Doctor
+@using (Html.BeginForm("Update", "Doctor", FormMethod.Post))
+{   
+    <p>@Html.HiddenFor(x => x.Id)</p>
+    <p>Current doctor's firstname is <b>@Model.FirstName</b></p>
+    <p>@Html.TextBoxFor(x => x.FirstName)</p>
+    <p>Current doctor's lastname is <b>@Model.LastName</b></p>
+    <p>@Html.TextBoxFor(x => x.LastName)</p>
+    <p>Current doctor's qualification is <b>@Model.Qualification</b></p>
+    <p>@Html.TextBoxFor(x => x.Qualification)</p>
+    <p><input type="submit" value="Send" /></p>
+}
+
