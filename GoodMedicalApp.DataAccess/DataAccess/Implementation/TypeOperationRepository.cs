@@ -102,8 +102,8 @@ namespace GoodMedicalApp.DataAccess.DataAccess.Implementation
 
             if (medicalEntity != null)
             {
-                medicalEntity.TypeOperationEntities.Remove(item);
-                medicalEntity.TypeOperationEntities.Add(item);
+                var existingTypeOperation = GetItemById(item.Id);
+                existingTypeOperation.Name = item.Name;
             }
         }
 

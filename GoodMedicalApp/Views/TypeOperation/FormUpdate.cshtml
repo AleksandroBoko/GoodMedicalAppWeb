@@ -1,0 +1,9 @@
+﻿@model GoodMedicalApp.Domain.Models.TypeOperation
+@using (Html.BeginForm("Update", "TypeOperation", FormMethod.Post))
+{
+    <p>Current type's name is <b>@Model.Name</b></p>
+    <p>@Html.HiddenFor(x => x.Id)</p>
+    <p>@Html.LabelFor(x => x.Name)</p>
+    <p>@Html.TextBoxFor(x => x.Name)</p>
+    <p><input type="submit" value="Send" /></p>
+}

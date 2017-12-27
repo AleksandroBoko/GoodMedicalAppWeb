@@ -35,7 +35,7 @@ namespace GoodMedicalApp.Controllers
         {
             typeOperationService.Add(typeOperation);
             typeOperationService.Save();
-            return Content("<p>The room was created successfully!</p>");
+            return Content("<p>The operation's type was created successfully!</p>");
         }
 
         public ContentResult Remove(int id)
@@ -51,6 +51,27 @@ namespace GoodMedicalApp.Controllers
             {
                 return Content("<p>The operation's type wasn't found!</p>");
             }
+        }
+
+        public ActionResult FormUpdate(int id)
+        {
+            var typeOperation = typeOperationService.GetItemById(id);
+            if (typeOperation != null)
+            {
+                return View(typeOperation);
+            }
+            else
+            {
+                return Content("<p>The operation's type wasn't found!</p>");
+            }
+        }
+
+        [HttpPost]
+        public ContentResult Update(TypeOperation typeOperation)
+        {
+            typeOperationService.Update(typeOperation);
+            typeOperationService.Save();
+            return Content("<p>The operation's type was created successfully!</p>");
         }
     }
 }

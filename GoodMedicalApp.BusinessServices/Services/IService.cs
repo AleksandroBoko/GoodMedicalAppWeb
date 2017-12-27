@@ -10,6 +10,7 @@ namespace GoodMedicalApp.BusinessServices.Services
     {
         void Add(T item);
         void Remove(T item);
+        void Update(T item);
         IList<T> GetAll();
         T GetItemById(int id);
         void Save();

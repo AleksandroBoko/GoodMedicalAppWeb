@@ -74,5 +74,10 @@ namespace GoodMedicalApp.BusinessServices.Services.Implementation
         {
             medicineRepository.Save();
         }
+
+        public void Update(Medicine item)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
