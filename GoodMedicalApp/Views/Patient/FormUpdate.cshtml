@@ -1,0 +1,21 @@
+﻿@model GoodMedicalApp.Domain.Models.Patient
+@using (Html.BeginForm("Update", "Patient", FormMethod.Post))
+{
+    <p>@Html.HiddenFor(x => x.Id)</p>
+    <p>Current patient's firstname is <b>@Model.FirstName</b></p>
+    <p>@Html.TextBoxFor(x => x.FirstName)</p>
+    <p>Current patient's lastname is <b>@Model.LastName</b></p>
+    <p>@Html.TextBoxFor(x => x.LastName)</p>
+    <p>Current patient's qualification is <b>@Model.Age</b></p>
+    <p>@Html.TextBoxFor(x => x.Age)</p>
+    if (Model.HospitalRoom != null)
+    {
+        <p>Current patient's room is <b>@Model.HospitalRoom.Number</b></p>
+    }
+    else
+    {
+        <p>Patient wasn't registered in room</p>
+    }
+    <p>@Html.DropDownListFor(x => x.HospitalRoom.Id, ViewBag.selectList as SelectList)</p>
+    <p><input type="submit" value="Send" /></p>
+}
