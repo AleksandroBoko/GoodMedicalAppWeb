@@ -297,6 +297,7 @@
     <Content Include="Views\TypeOperation\FormUpdate.cshtml" />
     <Content Include="Views\TypeMedicine\FormUpdate.cshtml" />
     <Content Include="Views\Room\FormUpdate.cshtml" />
+    <Content Include="Views\Doctor\FormUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
