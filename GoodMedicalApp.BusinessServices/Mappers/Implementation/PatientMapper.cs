@@ -30,7 +30,7 @@ namespace GoodMedicalApp.BusinessServices.Mappers.Implementation
                 {
                     var roomEntity = new RoomEntity();
                     roomMapper.MapToEntity(patient.HospitalRoom, roomEntity);
-                    patientEntity.Room = roomEntity;
+                    patientEntity.RoomId = roomEntity.Id;
                 }
             }
         }

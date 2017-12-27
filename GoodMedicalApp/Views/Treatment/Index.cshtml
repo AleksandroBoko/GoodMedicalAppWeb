@@ -28,6 +28,7 @@
         <th>Doctor</th>
         <th>Patient</th>
         <th>Date start</th>
+        <th>Actions</th>
     </tr>
     @foreach(var treatment in Model)
     {
@@ -36,6 +37,7 @@
             @GetDoctorFullName(ViewBag.doctors, treatment.DoctorId)
             @GetPatientFullName(ViewBag.patients, treatment.PatientId)
             <td>@treatment.StartDate</td>
+            <td>@Html.ActionLink("Remove", "Remove", "Treatment", new { id = treatment.Id}, null)</td>
         </tr>
     }
 </table>

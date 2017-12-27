@@ -47,5 +47,20 @@ namespace GoodMedicalApp.Controllers
             patientService.Save();
             return Content("<p>The patient was created successfully!</p>");
         }
+
+        public ContentResult Remove(int id)
+        {
+            var patient = patientService.GetItemById(id);
+            if (patient != null)
+            {
+                patientService.Remove(patient);
+                patientService.Save();
+                return Content("<p>The patient was removed successfully!</p>");
+            }
+            else
+            {
+                return Content("<p>The patient wasn't found!</p>");
+            }
+        }
     }
 }

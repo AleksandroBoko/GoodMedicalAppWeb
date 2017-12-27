@@ -53,7 +53,12 @@ namespace GoodMedicalApp.DataAccess.DataAccess.Implementation
                 return;
             }
 
-            medicalEntity.OperationEntities.Remove(item);
+            var operation = medicalEntity.OperationEntities.FirstOrDefault(x => x.Id == item.Id);
+            if(operation != null)
+            {
+                medicalEntity.OperationEntities.Remove(operation);
+            }
+            
         }
 
         public OperationEntity GetItemById(int id)

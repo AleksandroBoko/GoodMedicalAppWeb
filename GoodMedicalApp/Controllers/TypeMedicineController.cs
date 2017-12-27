@@ -37,5 +37,20 @@ namespace GoodMedicalApp.Controllers
             typeMedicineService.Save();
             return Content("<p>The medicine's type was created successfully!</p>");
         }
+
+        public ContentResult Remove(int id)
+        {
+            var typeMedicine = typeMedicineService.GetItemById(id);
+            if (typeMedicine != null)
+            {
+                typeMedicineService.Remove(typeMedicine);
+                typeMedicineService.Save();
+                return Content("<p>The medicine's type was removed successfully!</p>");
+            }
+            else
+            {
+                return Content("<p>The medicine's type wasn't found!</p>");
+            }
+        }
     }
 }

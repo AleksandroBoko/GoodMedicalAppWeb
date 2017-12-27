@@ -45,5 +45,20 @@ namespace GoodMedicalApp.Controllers
             return Content("<p>The room was created successfully!</p>");
         }
 
+        public ContentResult Remove(int id)
+        {
+            var room = roomService.GetItemById(id);
+            if (room != null)
+            {
+                roomService.Remove(room);
+                roomService.Save();
+                return Content("<p>The room was removed successfully!</p>");
+            }
+            else
+            {
+                return Content("<p>The room wasn't found!</p>");
+            }
+        }
+
     }
 }
