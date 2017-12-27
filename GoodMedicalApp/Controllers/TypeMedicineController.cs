@@ -52,5 +52,26 @@ namespace GoodMedicalApp.Controllers
                 return Content("<p>The medicine's type wasn't found!</p>");
             }
         }
+
+        public ActionResult FormUpdate(int id)
+        {
+            var typeMedicine = typeMedicineService.GetItemById(id);
+            if (typeMedicine != null)
+            {
+                return View(typeMedicine);
+            }
+            else
+            {
+                return Content("<p>The medicine's type wasn't found!</p>");
+            }
+        }
+
+        [HttpPost]
+        public ContentResult Update(TypeMedicine typeMedicine)
+        {
+            typeMedicineService.Update(typeMedicine);
+            typeMedicineService.Save();
+            return Content("<p>The medicine's type was updated successfully!</p>");
+        }
     }
 }
