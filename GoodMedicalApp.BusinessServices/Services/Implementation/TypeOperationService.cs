@@ -70,6 +70,13 @@ namespace GoodMedicalApp.BusinessServices.Services.Implementation
             typeOperationRepository.Delete(typeOperationEntity);
         }
 
+        public void Update(TypeOperation item)
+        {
+            var typeOperationEntity = new TypeOperationEntity();
+            typeOperationMapper.MapToEntity(item, typeOperationEntity);
+            typeOperationRepository.Update(typeOperationEntity);
+        }
+
         public void Save()
         {
             typeOperationRepository.Save();
