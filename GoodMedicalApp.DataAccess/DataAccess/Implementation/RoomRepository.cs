@@ -93,8 +93,8 @@ namespace GoodMedicalApp.DataAccess.DataAccess.Implementation
 
             if (medicalEntity != null)
             {
-                medicalEntity.RoomEntities.Remove(item);
-                medicalEntity.RoomEntities.Add(item);
+                var existingRoom = GetItemById(item.Id);
+                existingRoom.Number = item.Number;
             }
         }
 

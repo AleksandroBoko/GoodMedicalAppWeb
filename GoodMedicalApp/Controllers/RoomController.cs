@@ -60,5 +60,26 @@ namespace GoodMedicalApp.Controllers
             }
         }
 
+        public ActionResult FormUpdate(int id)
+        {
+            var room = roomService.GetItemById(id);
+            if (room != null)
+            {
+                return View(room);
+            }
+            else
+            {
+                return Content("<p>The room wasn't found!</p>");
+            }
+        }
+
+        [HttpPost]
+        public ContentResult Update(Room room)
+        {
+            roomService.Update(room);
+            roomService.Save();
+            return Content("<p>The room was updated successfully!</p>");
+        }
+
     }
 }

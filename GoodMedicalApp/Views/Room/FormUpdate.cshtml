@@ -1,0 +1,10 @@
+﻿@model GoodMedicalApp.Domain.Models.Room
+@using (Html.BeginForm("Update", "Room", FormMethod.Post))
+{
+    <p>Current room's number is <b>@Model.Number</b></p>
+    <p>@Html.HiddenFor(x => x.Id)</p>
+    <p>@Html.LabelFor(x => x.Number)</p>
+    <p>@Html.TextBoxFor(x => x.Number)</p>
+    <p><input type="submit" value="Send" /></p>
+}
+
