@@ -62,5 +62,30 @@ namespace GoodMedicalApp.Controllers
                 return Content("<p>The patient wasn't found!</p>");
             }
         }
+
+        public ActionResult FormUpdate(int id)
+        {
+            var patient = patientService.GetItemById(id);
+            if (patient != null)
+            {
+                var rooms = roomService.GetAll();
+                var selectList = new SelectList(rooms, "Id", "Number", "Number");
+                ViewBag.selectList = selectList;
+
+                return View(patient);
+            }
+            else
+            {
+                return Content("<p>The patient wasn't found!</p>");
+            }
+        }
+
+        [HttpPost]
+        public ContentResult Update(Patient patient)
+        {
+            patientService.Update(patient);
+            patientService.Save();
+            return Content("<p>The patient was updated successfully!</p>");
+        }
     }
 }

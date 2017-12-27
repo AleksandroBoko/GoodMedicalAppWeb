@@ -11,7 +11,7 @@
         <th>Last Name</th>
         <th>Age</th>
         <th>Room number</th>
-        <th>Actions</th>       
+        <th colspan="2">Actions</th>       
     </tr>
     @foreach (var entity in Model)
     {
@@ -31,6 +31,7 @@
             }
 
             <td>@Html.ActionLink("Remove", "Remove", "Patient", new { id = entity.Id }, null)</td>
+            <td>@Html.ActionLink("Edit", "FormUpdate", "Patient", new { id = entity.Id }, null)</td>
         </tr>
     }
 </table>
