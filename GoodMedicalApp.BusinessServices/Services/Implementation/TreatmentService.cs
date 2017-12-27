@@ -77,7 +77,9 @@ namespace GoodMedicalApp.BusinessServices.Services.Implementation
 
         public void Update(Treatment item)
         {
-            throw new NotImplementedException();
+            var treatmentEntity = new TreatmentEntity();
+            treatmentMapper.MapToEntity(item, treatmentEntity);
+            treatmentRepository.Update(treatmentEntity);
         }
     }
 }

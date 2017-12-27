@@ -1,0 +1,13 @@
+﻿@model GoodMedicalApp.Domain.Models.Treatment
+@using (Html.BeginForm("Update", "Treatment", FormMethod.Post))
+{
+    <p>@Html.HiddenFor(x => x.Id)</p>
+    <p>Date start of the treatment <b>@Model.StartDate</b></p>
+    <p>@Html.TextBoxFor(x => x.StartDate)</p>
+    <p>Current doctor <b>@Model.DoctorId</b></p>
+    <p>@Html.DropDownListFor(x => x.DoctorId, ViewBag.doctors as SelectList)</p>
+    <p>Current patient <b>@Model.PatientId</b></p>
+    <p>@Html.DropDownListFor(x => x.PatientId, ViewBag.patients as SelectList)</p>    
+    <p><input type="submit" value="Send" /></p>
+}
+
