@@ -77,7 +77,9 @@ namespace GoodMedicalApp.BusinessServices.Services.Implementation
 
         public void Update(Room item)
         {
-            throw new NotImplementedException();
+            var roomEntity = new RoomEntity();
+            roomMapper.MapToEntity(item, roomEntity);
+            roomRepository.Update(roomEntity);
         }
     }
 }
