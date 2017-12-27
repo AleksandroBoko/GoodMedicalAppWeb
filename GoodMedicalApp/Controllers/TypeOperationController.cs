@@ -56,8 +56,14 @@ namespace GoodMedicalApp.Controllers
         public ActionResult FormUpdate(int id)
         {
             var typeOperation = typeOperationService.GetItemById(id);
-            return typeOperation != null ? View(typeOperation) as ActionResult :
-                                           Content("<p>The operation's type wasn't found!</p>") as ActionResult;
+            if (typeOperation != null)
+            {
+                return View(typeOperation);
+            }
+            else
+            {
+                return Content("<p>The operation's type wasn't found!</p>");
+            }
         }
 
         [HttpPost]
