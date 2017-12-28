@@ -1,0 +1,27 @@
+﻿@model GoodMedicalApp.Domain.Models.OperationTransfer
+@using (Html.BeginForm("Update", "Operation", FormMethod.Post))
+{
+    <p>@Html.HiddenFor(x => x.Id)</p>
+    <p>Current treatment <b>@Model.TreatmentId</b></p>
+    <p>@Html.LabelFor(x => x.TreatmentId, "Treatment's Id")</p>
+    <p>@Html.DropDownListFor(x => x.TreatmentId, ViewBag.treatments as SelectList)</p>
+
+    <p>Current operation's type <b>@Model.CurrentTypeOperation.Name</b></p>
+    <p>@Html.LabelFor(x => x.CurrentTypeOperation.Id, "Operation's type")</p>
+    <p>@Html.DropDownListFor(x => x.CurrentTypeOperation.Id, ViewBag.typeOperations as SelectList)</p>
+
+    if (Model.Medicines != null)
+    {        
+        <ul>
+            @foreach (var medicine in Model.Medicines)
+            {
+                <li>@medicine</li>
+            }
+        </ul>
+    }
+    <p>@Html.LabelFor(x => x.Medicines)</p>
+    <p>@Html.ListBoxFor(x => x.Medicines, new MultiSelectList(ViewBag.medicines, "Id", "Name"))</p>
+    <p><input type="submit" value="Send" /></p>
+}
+
+

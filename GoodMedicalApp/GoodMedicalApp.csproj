@@ -300,6 +300,7 @@
     <Content Include="Views\Doctor\FormUpdate.cshtml" />
     <Content Include="Views\Patient\FormUpdate.cshtml" />
     <Content Include="Views\Treatment\FormUpdate.cshtml" />
+    <Content Include="Views\Operation\FormUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

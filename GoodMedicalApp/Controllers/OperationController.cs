@@ -43,20 +43,20 @@ namespace GoodMedicalApp.Controllers
 
             ViewBag.treatments = selectListTreatments;
             ViewBag.typeOperations = selectListTypeOperations;
-            ViewBag.medicines = medicines; 
+            ViewBag.medicines = medicines;
 
             return View(new OperationTransfer());
         }
 
         public ContentResult CreateOperation(OperationTransfer operationTransfer)
-        {           
+        {
             var operation = new Operation();
-            operation.CurrentTypeOperation = new TypeOperation() { Id = operationTransfer.CurrentTypeOperation.Id};
+            operation.CurrentTypeOperation = new TypeOperation() { Id = operationTransfer.CurrentTypeOperation.Id };
             operation.TreatmentId = operationTransfer.TreatmentId;
-            if(operationTransfer.Medicines.Any())
+            if (operationTransfer.Medicines.Any())
             {
                 operation.Medicines = new List<Medicine>();
-                foreach(var id in operationTransfer.Medicines)
+                foreach (var id in operationTransfer.Medicines)
                 {
                     var medicine = medicineService.GetItemById(id);
                     operation.Medicines.Add(medicine);
@@ -82,6 +82,57 @@ namespace GoodMedicalApp.Controllers
                 return Content("<p>The operation wasn't found!</p>");
             }
 
+        }
+
+        public ActionResult FormUpdate(int id)
+        {
+            try
+            {
+                var operationTransfer = operationService.GetTransferItemById(id);
+
+                var treatments = treatmentService.GetAll();
+                var typeOperations = typeOperationService.GetAll();
+                var medicines = medicineService.GetAll();
+
+                var selectListTreatments = new SelectList(treatments, "Id", "Id");
+                var selectListTypeOperations = new SelectList(typeOperations, "Id", "Name", "Name");
+
+                ViewBag.treatments = selectListTreatments;
+                ViewBag.typeOperations = selectListTypeOperations;
+                ViewBag.medicines = medicines;
+
+                return View(operationTransfer);
+            }
+            catch (ArgumentException e)
+            {
+                return Content($"<p>{e.Message}</p>");
+            }
+            catch (Exception e)
+            {
+                return Content($"<p>{e.Message}</p>");
+            }
+        }
+
+        [HttpPost]
+        public ContentResult Update(OperationTransfer operationTransfer)
+        {
+            try
+            {
+                var operation = operationService.GetItemFromTransferItem(operationTransfer);
+
+                operationService.Update(operation);
+                operationService.Save();
+
+                return Content("<p>The operation was updated successfully!</p>");
+            }
+            catch (ArgumentException e)
+            {
+                return Content($"<p>The operation wasn't updated! {e.Message}</p>");
+            }
+            catch (Exception e)
+            {
+                return Content($"<p>{e.Message}</p>");
+            }
         }
 
     }
