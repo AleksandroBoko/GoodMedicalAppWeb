@@ -8,7 +8,7 @@
         <th>Treatment Id</th>
         <th>Operation's type</th>
         <th>Medicines</th>
-        <th>Actions</th>
+        <th colspan="2">Actions</th>
     </tr>
     @foreach (var entity in Model)
     {
@@ -28,6 +28,7 @@
                 }
             </td>
             <td>@Html.ActionLink("Remove", "Remove", "Operation", new { id = entity.Id }, null)</td>
+            <td>@Html.ActionLink("Edit", "FormUpdate", "Operation", new { id = entity.Id }, null)</td>
         </tr>
     }
 </table>
