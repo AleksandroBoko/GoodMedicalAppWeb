@@ -88,7 +88,7 @@ namespace GoodMedicalApp.BusinessServices.Services.Implementation
             }
             else
             {
-                return null;
+                throw new ArgumentException("The operation object is null");
             }
         }
 
@@ -113,7 +113,7 @@ namespace GoodMedicalApp.BusinessServices.Services.Implementation
             }
             else
             {
-                return null;
+                throw new ArgumentException("The tranfer object is null");
             }
         }
 
