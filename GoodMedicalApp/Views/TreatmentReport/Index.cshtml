@@ -9,7 +9,7 @@
         <th>Conclusion</th>
         <th>Comment</th>
         <th>Medicines</th>
-        <th>Actions</th>
+        <th colspan="2">Actions</th>
     </tr>
     @foreach (var entity in Model)
     {
@@ -30,6 +30,7 @@
                 }
             </td>
             <td>@Html.ActionLink("Remove","Remove", "TreatmentReport", new { id = entity.Id}, null)</td>
+            <td>@Html.ActionLink("Edit", "FormUpdate", "TreatmentReport", new { id = entity.Id }, null)</td>
         </tr>
     }
 </table>
