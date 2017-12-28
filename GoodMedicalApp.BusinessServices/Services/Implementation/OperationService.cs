@@ -18,10 +18,12 @@ namespace GoodMedicalApp.BusinessServices.Services.Implementation
         {
             operationRepository = OperationRepository.GetInstance();
             operationMapper = new OperationMapper();
+            medicineService = new MedicineService();
         }
 
         private readonly IRepository<OperationEntity> operationRepository;
         private readonly IMapper<Operation, OperationEntity> operationMapper;
+        private readonly IMedicineService medicineService;
 
         public void Add(Operation item)
         {
@@ -55,6 +57,58 @@ namespace GoodMedicalApp.BusinessServices.Services.Implementation
             {
                 var operation = new Operation();
                 operationMapper.MapFromEntity(entity, operation);
+                return operation;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public OperationTransfer GetTransferItemById(int id)
+        {
+            var operation = GetItemById(id);
+            if (operation != null)
+            {
+                var currentMedicines = new List<int>();
+                if (operation.Medicines != null && operation.Medicines.Any())
+                {
+                    currentMedicines = operation.Medicines.Select(x => x.Id).ToList();
+                }
+
+                var operationTransfer = new OperationTransfer()
+                {
+                    Id = operation.Id,
+                    CurrentTypeOperation = operation.CurrentTypeOperation,
+                    TreatmentId = operation.TreatmentId,
+                    Medicines = currentMedicines
+                };
+
+                return operationTransfer;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public Operation GetItemFromTransferItem(OperationTransfer operationTransfer)
+        {
+            if (operationTransfer != null)
+            {
+                var operation = new Operation() { Id = operationTransfer.Id };
+                operation.CurrentTypeOperation = new TypeOperation() { Id = operationTransfer.CurrentTypeOperation.Id };
+                operation.TreatmentId = operationTransfer.TreatmentId;
+                if (operationTransfer.Medicines.Any())
+                {
+                    operation.Medicines = new List<Medicine>();
+                    foreach (var id in operationTransfer.Medicines)
+                    {
+                        var medicine = medicineService.GetItemById(id);
+                        operation.Medicines.Add(medicine);
+                    }
+                }
+
                 return operation;
             }
             else
