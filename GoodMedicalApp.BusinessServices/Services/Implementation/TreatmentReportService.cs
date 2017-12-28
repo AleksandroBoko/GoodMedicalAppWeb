@@ -18,10 +18,12 @@ namespace GoodMedicalApp.BusinessServices.Services.Implementation
         {
             treatmentReportRepository = TreatmentReportRepository.GetInstance();
             treatmentReportMapper = new TreatmentReportMapper();
+            medicineService = new MedicineService();
         }
 
         private readonly IRepository<TreatmentReportEntity> treatmentReportRepository;
         private readonly IMapper<TreatmentReport, TreatmentReportEntity> treatmentReportMapper;
+        private readonly IMedicineService medicineService;
 
         public void Add(TreatmentReport item)
         {
@@ -77,7 +79,64 @@ namespace GoodMedicalApp.BusinessServices.Services.Implementation
 
         public void Update(TreatmentReport item)
         {
-            throw new NotImplementedException();
+            var treatmentReportEntity = new TreatmentReportEntity();
+            treatmentReportMapper.MapToEntity(item, treatmentReportEntity);
+            treatmentReportRepository.Update(treatmentReportEntity);
+        }
+
+        public TreatmentReportTransfer GetTransferItemById(int id)
+        {
+            var report = GetItemById(id);
+            if (report != null)
+            {
+                var currentMedicines = new List<int>();
+                if (report.Medicines != null && report.Medicines.Any())
+                {
+                    currentMedicines = report.Medicines.Select(x => x.Id).ToList();
+                }
+
+                var reportTransfer = new TreatmentReportTransfer()
+                {
+                    Id = report.Id,
+                    CurrentTreatment = report.CurrentTreatment,
+                    Conclusion = report.Conclusion,
+                    Comment = report.Comment,
+                    Medicines = currentMedicines
+                };
+
+                return reportTransfer;
+            }
+            else
+            {
+                throw new ArgumentException("The treatment report object is null");
+            }
+        }
+
+        public TreatmentReport GetItemFromTransferItem(TreatmentReportTransfer treatmentReportTransfer)
+        {
+            if (treatmentReportTransfer != null)
+            {
+                var treatmentReport = new TreatmentReport() { Id = treatmentReportTransfer.Id };
+                treatmentReport.CurrentTreatment = treatmentReportTransfer.CurrentTreatment;
+                treatmentReport.Conclusion = treatmentReportTransfer.Conclusion;
+                treatmentReport.Comment = treatmentReportTransfer.Comment;
+
+                if (treatmentReportTransfer.Medicines.Any())
+                {
+                    treatmentReport.Medicines = new List<Medicine>();
+                    foreach (var id in treatmentReportTransfer.Medicines)
+                    {
+                        var medicine = medicineService.GetItemById(id);
+                        treatmentReport.Medicines.Add(medicine);
+                    }
+                }
+
+                return treatmentReport;
+            }
+            else
+            {
+                throw new ArgumentException("The tranfer treatment report object is null");
+            }
         }
     }
 }

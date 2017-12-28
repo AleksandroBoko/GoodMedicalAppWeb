@@ -79,5 +79,53 @@ namespace GoodMedicalApp.Controllers
             }
 
         }
+
+        public ActionResult FormUpdate(int id)
+        {
+            try
+            {
+                var operationTransfer = treatmentReportService.GetTransferItemById(id);
+
+                var treatments = treatmentService.GetAll();
+                var medicines = medicineService.GetAll();
+
+                var selectListTreatments = new SelectList(treatments, "Id", "Id");
+
+                ViewBag.treatments = selectListTreatments;                
+                ViewBag.medicines = medicines;
+
+                return View(operationTransfer);
+            }
+            catch (ArgumentException e)
+            {
+                return Content($"<p>{e.Message}</p>");
+            }
+            catch (Exception e)
+            {
+                return Content($"<p>{e.Message}</p>");
+            }
+        }
+
+        [HttpPost]
+        public ContentResult Update(TreatmentReportTransfer treatmentReportTransfer)
+        {
+            try
+            {
+                var operation = treatmentReportService.GetItemFromTransferItem(treatmentReportTransfer);
+
+                treatmentReportService.Update(operation);
+                treatmentReportService.Save();
+
+                return Content("<p>The report was updated successfully!</p>");
+            }
+            catch (ArgumentException e)
+            {
+                return Content($"<p>The report wasn't updated! {e.Message}</p>");
+            }
+            catch (Exception e)
+            {
+                return Content($"<p>{e.Message}</p>");
+            }
+        }
     }
 }

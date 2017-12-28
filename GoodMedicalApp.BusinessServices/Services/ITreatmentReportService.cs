@@ -9,6 +9,7 @@ namespace GoodMedicalApp.BusinessServices.Services
 {
     public interface ITreatmentReportService : IService<TreatmentReport>
     {
-
+        TreatmentReportTransfer GetTransferItemById(int id);
+        TreatmentReport GetItemFromTransferItem(TreatmentReportTransfer treatmentReportTransfer);
     }
 }
